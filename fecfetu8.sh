@@ -2,6 +2,12 @@
 
 function traverse(){
 
+if [ -z $1 ] 
+then
+  echo "ERROR : Please write argument for path."
+  return ;
+fi
+
 DIRECTORY_PATH=$1;
 # echo "DIRECTORY_PATH : $DIRECTORY_PATH";
 
@@ -9,7 +15,7 @@ for f in $DIRECTORY_PATH/* ;
 do  
 
   FILE_NAME=$f;
-  # echo "FILE_NAME : $FILE_NAME";
+  #echo "FILE_NAME : $FILE_NAME";
   CURRENT_ENCODING=`file -bi $FILE_NAME | cut -d "=" -f2`;
   
   if [ "$CURRENT_ENCODING" == "iso-8859-1" ];
@@ -31,5 +37,5 @@ done
 
 echo "Converting Start..."
 # first function call
-traverse .
+traverse $1
 echo "Converting Finished."
